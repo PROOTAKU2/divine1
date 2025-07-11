@@ -2,7 +2,7 @@ import asyncio
 import os
 import re
 from typing import Union
-
+from Procokies import get_cookie_string
 import yt_dlp
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -28,6 +28,10 @@ async def shell_cmd(cmd):
 
 cookies_file = "VILLAIN_MUSIC/assets/cookies.txt"
 
+if not os.path.exists(cookies_file) or os.path.getsize(cookies_file) == 0:
+    with open(cookies_file, "w") as f:
+        f.write(get_cookie_string())
+        
 class YouTubeAPI:
     def __init__(self):
         self.base = "https://www.youtube.com/watch?v="
