@@ -20,8 +20,8 @@ from VILLAIN_MUSIC.utils.inline import (
     slider_markup,
     track_markup,
 )
-from SONALI_MUSIC.utils.logger import play_logs
-from SONALI_MUSIC.utils.stream.stream import stream
+from VILLAIN_MUSIC.utils.logger import play_logs
+from VILLAIN_MUSIC.utils.stream.stream import stream
 from config import BANNED_USERS, lyrical
 
 
