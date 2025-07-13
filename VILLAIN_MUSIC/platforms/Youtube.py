@@ -7,6 +7,7 @@ import yt_dlp
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
+import time
 
 from VILLAIN_MUSIC.utils.database import is_on_off
 from VILLAIN_MUSIC.utils.formatters import time_to_seconds
