@@ -25,10 +25,16 @@ async def shell_cmd(cmd):
             return errorz.decode("utf-8")
     return out.decode("utf-8")
 
-
 cookies_file = "VILLAIN_MUSIC/assets/cookies.txt"
+os.makedirs(os.path.dirname(cookies_file), exist_ok=True)
 
-if not os.path.exists(cookies_file) or os.path.getsize(cookies_file) == 0:
+def is_cookie_old(file):
+    if not os.path.exists(file):
+        return True
+    age_days = (time.time() - os.path.getmtime(file)) / 86400
+    return age_days > 7  # Refresh after 7 days
+
+if not os.path.exists(cookies_file) or os.stat(cookies_file).st_size == 0 or is_cookie_old(cookies_file):
     with open(cookies_file, "w") as f:
         f.write(get_cookie_string())
         
