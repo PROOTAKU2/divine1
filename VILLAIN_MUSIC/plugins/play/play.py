@@ -7,7 +7,7 @@ from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
 from VILLAIN_MUSIC import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
-from VILLAIN_MUSIC.core.call import Sona
+from VILLAIN_MUSIC.core.call import VILLAIN
 from VILLAIN_MUSIC.utils import seconds_to_min, time_to_seconds
 from VILLAIN_MUSIC.utils.channelplay import get_channeplayCB
 from VILLAIN_MUSIC.utils.decorators.language import languageCB
