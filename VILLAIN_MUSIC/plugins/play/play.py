@@ -6,22 +6,22 @@ from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
 from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
-from SONALI_MUSIC import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
-from SONALI_MUSIC.core.call import Sona
-from SONALI_MUSIC.utils import seconds_to_min, time_to_seconds
-from SONALI_MUSIC.utils.channelplay import get_channeplayCB
-from SONALI_MUSIC.utils.decorators.language import languageCB
-from SONALI_MUSIC.utils.decorators.play import PlayWrapper
-from SONALI_MUSIC.utils.formatters import formats
-from SONALI_MUSIC.utils.inline import (
+from VILLAIN_MUSIC import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
+from VILLAIN_MUSIC.core.call import VILLAIN
+from VILLAIN_MUSIC.utils import seconds_to_min, time_to_seconds
+from VILLAIN_MUSIC.utils.channelplay import get_channeplayCB
+from VILLAIN_MUSIC.utils.decorators.language import languageCB
+from VILLAIN_MUSIC.utils.decorators.play import PlayWrapper
+from VILLAIN_MUSIC.utils.formatters import formats
+from VILLAIN_MUSIC.utils.inline import (
     botplaylist_markup,
     livestream_markup,
     playlist_markup,
     slider_markup,
     track_markup,
 )
-from SONALI_MUSIC.utils.logger import play_logs
-from SONALI_MUSIC.utils.stream.stream import stream
+from VILLAIN_MUSIC.utils.logger import play_logs
+from VILLAIN_MUSIC.utils.stream.stream import stream
 from config import BANNED_USERS, lyrical
 
 
