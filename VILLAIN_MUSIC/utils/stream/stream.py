@@ -1,5 +1,4 @@
 import os
-import logging
 from random import randint
 from typing import Union
 
@@ -7,17 +6,12 @@ from pyrogram.types import InlineKeyboardMarkup
 
 import config
 from VILLAIN_MUSIC import Carbon, YouTube, app
-from VILLAIN_MUSIC.core.call import VILLAIN
+from VILLAIN_MUSIC.core.call import Sona
 from VILLAIN_MUSIC.misc import db
 from VILLAIN_MUSIC.utils.database import add_active_video_chat, is_active_chat
 from VILLAIN_MUSIC.utils.exceptions import AssistantErr
-from VILLAIN_MUSIC.utils.inline import (
-    aq_markup,
-    close_markup,
-    stream_markup,
-    telegram_markup,
-)
-from VILLAIN_MUSIC.utils.pastebin import VILLAINBin
+from VILLAIN_MUSIC.utils.inline import aq_markup, close_markup, stream_markup
+from VILLAIN_MUSIC.utils.pastebin import SonaBin
 from VILLAIN_MUSIC.utils.stream.queue import put_queue, put_queue_index
 from VILLAIN_MUSIC.utils.thumbnails import get_thumb
 
@@ -38,7 +32,7 @@ async def stream(
     if not result:
         return
     if forceplay:
-        await VILLAIN.force_stop_stream(chat_id)
+        await Sona.force_stop_stream(chat_id)
     if streamtype == "playlist":
         msg = f"{_['play_19']}\n\n"
         count = 0
@@ -83,15 +77,9 @@ async def stream(
                     file_path, direct = await YouTube.download(
                         vidid, mystic, video=status, videoid=True
                     )
-                except Exception:
-                    try:
-                        
-                        file_path, direct = await YTB.download(
-                            vidid, mystic, video=status, videoid=True
-                        )
-                    except Exception:
-                        raise AssistantErr(_["play_14"])
-                await VILLAIN.join_call(
+                except:
+                    raise AssistantErr(_["play_14"])
+                await Sona.join_call(
                     chat_id,
                     original_chat_id,
                     file_path,
@@ -111,7 +99,7 @@ async def stream(
                     forceplay=forceplay,
                 )
                 img = await get_thumb(vidid)
-                button = stream_markup(_, vidid, chat_id)
+                button = stream_markup(_, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
                     photo=img,
@@ -128,7 +116,7 @@ async def stream(
         if count == 0:
             return
         else:
-            link = await VILLAINBin(msg)
+            link = await SonaBin(msg)
             lines = msg.count("\n")
             if lines >= 17:
                 car = os.linesep.join(msg.split(os.linesep)[:17])
@@ -153,13 +141,8 @@ async def stream(
             file_path, direct = await YouTube.download(
                 vidid, mystic, videoid=True, video=status
             )
-        except Exception:
-            try:
-                file_path, direct = await YTB.download(
-                    vidid, mystic, videoid=True, video=status
-                    )
-            except Exception:
-                raise AssistantErr(_["play_14"])
+        except:
+            raise AssistantErr(_["play_14"])
         if await is_active_chat(chat_id):
             await put_queue(
                 chat_id,
@@ -182,7 +165,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await VILLAIN.join_call(
+            await Sona.join_call(
                 chat_id,
                 original_chat_id,
                 file_path,
@@ -202,7 +185,7 @@ async def stream(
                 forceplay=forceplay,
             )
             img = await get_thumb(vidid)
-            button = stream_markup(_, vidid, chat_id)
+            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=img,
@@ -242,7 +225,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await VILLAIN.join_call(chat_id, original_chat_id, file_path, video=None)
+            await Sona.join_call(chat_id, original_chat_id, file_path, video=None)
             await put_queue(
                 chat_id,
                 original_chat_id,
@@ -255,7 +238,7 @@ async def stream(
                 "audio",
                 forceplay=forceplay,
             )
-            button = telegram_markup(_, chat_id)
+            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=config.SOUNCLOUD_IMG_URL,
@@ -294,7 +277,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await NOBITA.join_call(chat_id, original_chat_id, file_path, video=status)
+            await Sona.join_call(chat_id, original_chat_id, file_path, video=status)
             await put_queue(
                 chat_id,
                 original_chat_id,
@@ -309,7 +292,7 @@ async def stream(
             )
             if video:
                 await add_active_video_chat(chat_id)
-            button = telegram_markup(_, chat_id)
+            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=config.TELEGRAM_VIDEO_URL if video else config.TELEGRAM_AUDIO_URL,
@@ -350,7 +333,7 @@ async def stream(
             n, file_path = await YouTube.video(link)
             if n == 0:
                 raise AssistantErr(_["str_3"])
-            await RAUSHAN.join_call(
+            await Sona.join_call(
                 chat_id,
                 original_chat_id,
                 file_path,
@@ -370,7 +353,7 @@ async def stream(
                 forceplay=forceplay,
             )
             img = await get_thumb(vidid)
-            button = telegram_markup(_, chat_id)
+            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=img,
@@ -408,7 +391,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await RAUSHAN.join_call(
+            await Sona.join_call(
                 chat_id,
                 original_chat_id,
                 link,
@@ -425,7 +408,7 @@ async def stream(
                 "video" if video else "audio",
                 forceplay=forceplay,
             )
-            button = telegram_markup(_, chat_id)
+            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=config.STREAM_IMG_URL,
