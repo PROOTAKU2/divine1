@@ -6,7 +6,7 @@ from pyrogram.types import InlineKeyboardMarkup
 
 import config
 from VILLAIN_MUSIC import Carbon, YouTube, app
-from VILLAIN_MUSIC.core.call import Sona
+from VILLAIN_MUSIC.core.call import VILLAIN
 from VILLAIN_MUSIC.misc import db
 from VILLAIN_MUSIC.utils.database import add_active_video_chat, is_active_chat
 from VILLAIN_MUSIC.utils.exceptions import AssistantErr
@@ -32,7 +32,7 @@ async def stream(
     if not result:
         return
     if forceplay:
-        await Sona.force_stop_stream(chat_id)
+        await VILLAIN.force_stop_stream(chat_id)
     if streamtype == "playlist":
         msg = f"{_['play_19']}\n\n"
         count = 0
@@ -165,7 +165,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await Sona.join_call(
+            await VILLAIN.join_call(
                 chat_id,
                 original_chat_id,
                 file_path,
@@ -225,7 +225,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await Sona.join_call(chat_id, original_chat_id, file_path, video=None)
+            await VILLAIN.join_call(chat_id, original_chat_id, file_path, video=None)
             await put_queue(
                 chat_id,
                 original_chat_id,
@@ -277,7 +277,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await Sona.join_call(chat_id, original_chat_id, file_path, video=status)
+            await VILLAIN.join_call(chat_id, original_chat_id, file_path, video=status)
             await put_queue(
                 chat_id,
                 original_chat_id,
@@ -333,7 +333,7 @@ async def stream(
             n, file_path = await YouTube.video(link)
             if n == 0:
                 raise AssistantErr(_["str_3"])
-            await Sona.join_call(
+            await VILLAIN.join_call(
                 chat_id,
                 original_chat_id,
                 file_path,
@@ -391,7 +391,7 @@ async def stream(
         else:
             if not forceplay:
                 db[chat_id] = []
-            await Sona.join_call(
+            await VILLAIN.join_call(
                 chat_id,
                 original_chat_id,
                 link,
