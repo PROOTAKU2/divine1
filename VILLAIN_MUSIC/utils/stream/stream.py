@@ -11,7 +11,7 @@ from VILLAIN_MUSIC.misc import db
 from VILLAIN_MUSIC.utils.database import add_active_video_chat, is_active_chat
 from VILLAIN_MUSIC.utils.exceptions import AssistantErr
 from VILLAIN_MUSIC.utils.inline import aq_markup, close_markup, stream_markup
-from VILLAIN_MUSIC.utils.pastebin import SonaBin
+from VILLAIN_MUSIC.utils.pastebin import VILLAINBin
 from VILLAIN_MUSIC.utils.stream.queue import put_queue, put_queue_index
 from VILLAIN_MUSIC.utils.thumbnails import get_thumb
 
